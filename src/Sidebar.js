@@ -1,4 +1,6 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import NOTES from './dummy-store';
 import './Sidebar.css';
 
 class Sidebar extends React.Component {
@@ -10,9 +12,11 @@ class Sidebar extends React.Component {
   }
 
   handleDisplayFolders = () => {
-    return this.props.folders.map(folder => 
+    return NOTES.folders.map(folder => 
       <li className='folder' key={folder.id} id={folder.id}>
-        {folder.name}
+        <NavLink to={`/folder/${folder.id}`}>
+          {folder.name}
+        </NavLink>
       </li>)
   }
 

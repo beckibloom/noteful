@@ -24,3 +24,7 @@
 .folder:hover {
     background:skyblue;
 }
+
+.active {
+    background:skyblue;
+}

@@ -3,24 +3,12 @@ import { Link } from 'react-router-dom';
 import NOTES from './dummy-store.js';
 import './NoteList.css';
 
-class NoteList extends React.Component {
-  renderNotes = () => {
-    // if (this.props.match.params.folderId) {
-    //   return (
-    //     NOTES.notes.find(note =>
-    //       note.folderId === this.props.match.params.folderId
-    //     )
-    //   )
-    // } else {
-      return NOTES.notes
-    // }
-  }
+class MainNoteList extends React.Component {
   render() {
-    const notesToRender = this.renderNotes();
     return (
       <section className='NoteList' id='notelist'>
           <ul>
-            {notesToRender.map(note =>
+            {NOTES.notes.map(note =>
               <li key={note.id} className='note'>
                 <Link to={`/note/${note.id}`}>
                   <h2>
@@ -38,4 +26,4 @@ class NoteList extends React.Component {
   }
 }
 
-export default NoteList;
+export default MainNoteList;
