@@ -1,7 +1,14 @@
-#note {
+ul {
+    list-style-type:none;
+    padding:0;
+}
+
+.note {
     border: 1px solid black;
     padding:10px;
     position:relative;
+    margin-bottom:10px;
+    margin-right:10px;
 }
 
 .delete {
@@ -12,4 +19,8 @@
     padding:10px;
     bottom:10px;
     right:10px;
+}
+
+.note-content {
+    padding:10px;
 }

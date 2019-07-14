@@ -14,7 +14,7 @@
     padding:10px;
 }
 
-.add-folder {
+.add-folder, .go-back {
     background:white;
     border:1px solid black;
     width:160px;

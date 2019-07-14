@@ -2,16 +2,43 @@ import React from 'react';
 import './Sidebar.css';
 
 class Sidebar extends React.Component {
-  render() {
-    return (
-      <section className='Sidebar' id='sidebar'>
+  constructor(props) {
+    super(props);
+    this.state={
+      displayingNote: false
+    }
+  }
+
+  handleDisplayFolders = () => {
+    return this.props.folders.map(folder => 
+      <li className='folder' key={folder.id} id={folder.id}>
+        {folder.name}
+      </li>)
+  }
+
+  handleDisplayNote = () => {
+    if (this.state.displayingNote === false) {
+      return (
+        <section className='Sidebar' id='sidebar'>
           <ul>
-              <li className="folder">Folder 1</li>
-              <li className="folder">Folder 2</li>
-              <li className="folder">Folder 3</li>
+              {this.handleDisplayFolders()}
           </ul>
           <button className="add-folder">Add Folder</button>
-      </section>
+        </section>
+      )
+    }
+    else {
+      return (
+        <section className='Sidebar' id='sidebar'>
+          <button className="go-back">Go Back</button>
+        </section>
+      )
+    }
+  }
+
+  render() {
+    return (
+      this.handleDisplayNote()
     );
   }
 }

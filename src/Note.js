@@ -1,4 +1,6 @@
 import React from 'react';
+import NOTES from './dummy-store.js';
+import { Link } from 'react-router-dom';
 import './Note.css';
 
 class Note extends React.Component {
@@ -18,15 +20,22 @@ class Note extends React.Component {
   }
 
   render() {
+    const note = NOTES.notes.find(n =>
+      n.id === this.props.match.params.noteId
+    )
     return (
-      <>
-        <li id='note'>
-            <h2>Note 1</h2>
-            <p className="date-modified">Date modified on 3rd Jan 2019</p>
-            <button className="delete">Delete Note</button>
-        </li>
-        <p className='note-content'>{this.handleSelected()}</p>
-      </>
+      <section className='NoteList'>
+        <ul>
+          <li key={note.id} className='note'>
+            <Link to={`/note/${note.id}`}>
+              <h2>{note.name}</h2>
+            </Link>
+              <p className="date-modified">Date modified: {note.modified}</p>
+              <button className="delete">Delete Note</button>
+          </li>
+          <p className='note-content'>{note.content}</p>
+        </ul>
+      </section>
     );
   }
 }
