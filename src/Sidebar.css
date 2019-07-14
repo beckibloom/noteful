@@ -1,0 +1,26 @@
+#sidebar {
+    margin:10px;
+    text-align:center;
+    width: 180px;
+}
+
+#sidebar ul {
+    list-style-type:none;
+    padding:0;
+}
+
+#sidebar li {
+    border:1px solid black;
+    padding:10px;
+}
+
+.add-folder {
+    background:white;
+    border:1px solid black;
+    width:160px;
+    padding:10px;
+}
+
+.folder:hover {
+    background:skyblue;
+}

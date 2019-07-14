@@ -1,0 +1,15 @@
+#notelist {
+    width:80%;
+}
+
+#notelist ul {
+    list-style-type:none;
+    padding:0;
+}
+
+.add-note {
+    background:white;
+    border:1px solid black;
+    width:160px;
+    padding:10px;
+}

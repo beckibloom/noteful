@@ -1,0 +1,11 @@
+header {
+    width:100%;
+    border:1px solid black;
+    padding-left: 200px;
+    padding-top:75px;
+    padding-bottom:35px;
+}
+
+h1 {
+    font-weight:normal;   
+}

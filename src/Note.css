@@ -1,0 +1,15 @@
+#note {
+    border: 1px solid black;
+    padding:10px;
+    position:relative;
+}
+
+.delete {
+    position:absolute;
+    background:white;
+    border:1px solid black;
+    width:160px;
+    padding:10px;
+    bottom:10px;
+    right:10px;
+}
