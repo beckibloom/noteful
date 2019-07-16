@@ -1,16 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import NOTES from './dummy-store';
+import NotefulContext from './NotefulContext';
 import './Sidebar.css';
 
 class MainSidebar extends React.Component {
+
+  static contextType = NotefulContext;
+
   handleDisplayFolders = () => {
-    return NOTES.folders.map(folder => 
-      <li className='folder' key={folder.id} id={folder.id}>
-        <NavLink to={`/folder/${folder.id}`}>
-          {folder.name}
-        </NavLink>
-      </li>)
+    return (
+      this.context.folders.map(folder => 
+        <li className='folder' key={folder.id} id={folder.id}>
+          <NavLink to={`/folder/${folder.id}`}>
+            {folder.name}
+          </NavLink>
+        </li>))
   }
 
   render() {

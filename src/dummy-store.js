@@ -1,3 +1,11 @@
+// To add the content type header in fetch requests you can pass in an initial object with settings. Here's an example for a DELETE request:
+// fetch(`http://localhost:9090/notes/${noteId}`, {
+//   method: 'DELETE',
+//   headers: {
+//     'content-type': 'application/json'
+//   },
+// })
+
 const NOTES = {
   "folders": [
     {

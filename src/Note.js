@@ -1,43 +1,65 @@
 import React from 'react';
-import NOTES from './dummy-store.js';
 import { Link } from 'react-router-dom';
 import './Note.css';
+import NotefulContext from './NotefulContext';
 
-class Note extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      selected: false
-    }
-  }
-
-  handleSelected = () => {
-    return (
-      this.state.selected === true
-        ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper sapien at metus varius, eu eleifend eros tincidunt. Vestibulum eget quam vitae urna fringilla varius. Aliquam sed vehicula magna. Etiam facilisis hendrerit ex sed rutrum. Nullam consequat urna eget porta venenatis. Vivamus eget iaculis ante. Vivamus maximus malesuada turpis, ut elementum eros congue sed. Proin non risus felis.'
-        : ''
-    )
-  }
-
-  render() {
-    const note = NOTES.notes.find(n =>
-      n.id === this.props.match.params.noteId
-    )
-    return (
-      <section className='NoteList'>
-        <ul>
-          <li key={note.id} className='note'>
-            <Link to={`/note/${note.id}`}>
-              <h2>{note.name}</h2>
-            </Link>
-              <p className="date-modified">Date modified: {note.modified}</p>
-              <button className="delete">Delete Note</button>
-          </li>
-          <p className='note-content'>{note.content}</p>
-        </ul>
-      </section>
-    );
-  }
+function deleteNoteRequest(noteId, cb, props) {
+  const notesEndpoint = 'http://localhost:9090/notes';
+  fetch(notesEndpoint + `/${noteId}`, {
+    method: 'DELETE'
+  })
+    .then(res => {
+      if (!res.ok) {
+        return res.json().then(error => {
+          throw error
+        })
+      }
+      return res.json()
+    })
+    .then(data => {
+      cb(noteId)
+      props.history.push('/')
+    })
+    .catch(error => {
+      console.error(error)
+    })
 }
 
-export default Note;
+function getNoteObj(context, props) {
+  const note = context.notes.find(n =>
+    n.id === props.match.params.noteId)
+  return note;
+}
+
+export default function Note(props) {
+  return (
+  <NotefulContext.Consumer>
+
+  {(context) => (
+    <section className='NoteList'>
+      <ul>
+        <li key={getNoteObj(context, props).id} className='note'>
+          <Link to={`/note/${getNoteObj(context, props).id}`}>
+            <h2>{getNoteObj(context, props).name}</h2>
+          </Link>
+            <p className="date-modified">Date modified: {getNoteObj(context, props).modified}</p>
+            <button 
+                className="delete"
+                onClick={() => {
+                  deleteNoteRequest(
+                    getNoteObj(context, props).id,
+                    context.deleteNote,
+                    props
+                  )}
+                }>
+                Delete Note
+              </button>
+        </li>
+        <p className='note-content'>{getNoteObj(context, props).content}</p>
+      </ul>
+    </section>
+  )}
+
+  </NotefulContext.Consumer>
+  )
+}
