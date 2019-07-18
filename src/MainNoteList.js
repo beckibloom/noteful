@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NotefulContext from './NotefulContext.js';
+import NoteIcon from './images/noteicon.png';
 import './NoteList.css';
 
 function deleteNoteRequest(noteId, cb) {
@@ -24,11 +25,18 @@ function deleteNoteRequest(noteId, cb) {
     })
 }
 
-export default function MainNoteList(props) {
-  return (
-    <NotefulContext.Consumer>
-    {(context) => (
-    <section className='NoteList' id='notelist'>
+class MainNoteList extends React.Component {
+  render() {
+    return (
+      <NotefulContext.Consumer>
+      {(context) => (
+        <>
+        <Link to={`/addnote`}>
+          <button className="add-note">
+            <img src={NoteIcon} alt="Note Icon" className='noteicon' /> 
+            &nbsp; Add New Note
+          </button>
+        </Link>
         <ul>
           {context.notes.map(note =>
             <li key={note.id} className='note'>
@@ -51,9 +59,12 @@ export default function MainNoteList(props) {
             </li>
           )}
         </ul>
-        <button className="add-note">Add Note</button>
-    </section>)}
+        </>
+      )}
 
-    </NotefulContext.Consumer>
-  );
+      </NotefulContext.Consumer>
+    );
+  }
 }
+
+export default MainNoteList

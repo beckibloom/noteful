@@ -28,3 +28,19 @@
 .active {
     background:skyblue;
 }
+
+.foldericon {
+    height:15px;
+}
+
+.noteicon {
+    height:15px;
+}
+
+.add-note {
+    margin-top:10px;
+}
+
+button:hover {
+    background:skyblue;
+}

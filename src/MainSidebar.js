@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
+import FolderIcon from './images/foldericon.png';
 import './Sidebar.css';
 
 class MainSidebar extends React.Component {
@@ -17,13 +18,27 @@ class MainSidebar extends React.Component {
         </li>))
   }
 
+  handleDisplayButtons = () => {
+    return (
+      <div className="Add__buttons">
+        <Link to={`/addfolder`}>
+          <button className="add-folder">
+            <img src={FolderIcon} alt="Folder Icon" className='foldericon' /> 
+            &nbsp; Add New Folder
+          </button>
+        </Link>
+      </div>
+    )
+  }
+
   render() {
     return (
-      <nav className='Sidebar' id='sidebar'>
+      <nav>
+        <h3>Folders</h3>
           <ul>
               {this.handleDisplayFolders()}
           </ul>
-          <button className="add-folder">Add Folder</button>
+        {this.handleDisplayButtons()}
       </nav>
     );
   }

@@ -24,40 +24,49 @@ function deleteNoteRequest(noteId, cb) {
     })
 }
 
-export default function FilteredNoteList(props) {
-  return (
-    <NotefulContext.Consumer>
+class FilteredNoteList extends React.Component {
 
-    {(context) => (
-      <section className='NoteList' id='notelist'>
-          <ul>
-            {context.notes.filter(note => 
-            note.folderId === props.match.params.folderId)
-            .map(note =>
-              <li key={note.id} className='note'>
-                <Link to={`/note/${note.id}`}>
-                  <h2>
-                    {note.name}
-                  </h2>
-                </Link>
-                <p className='date-modified'> Date Modified: {note.modified}</p>
-                <button 
-                className="delete"
-                onClick={() => {
-                  deleteNoteRequest(
-                    note.id,
-                    context.deleteNote
-                  )
-                }}>
-                Delete Note
-              </button>
-              </li>
-            )}
-          </ul>
-          <button className="add-note">Add Note</button>
-      </section>
-    )}
+  render() {
+    return (
+      <NotefulContext.Consumer>
 
-    </NotefulContext.Consumer>
-  );
+      {(context) => (
+        <>
+        <button 
+          className="clear-filter"
+          onClick={() => this.props.history.push('/')}>
+          Clear Filter
+          </button>
+        <ul>
+          {context.notes.filter(note => 
+          note.folderId === this.props.match.params.folderId)
+          .map(note =>
+            <li key={note.id} className='note'>
+              <Link to={`/note/${note.id}`}>
+                <h2>
+                  {note.name}
+                </h2>
+              </Link>
+              <p className='date-modified'> Date Modified: {note.modified}</p>
+              <button 
+              className="delete"
+              onClick={() => {
+                deleteNoteRequest(
+                  note.id,
+                  context.deleteNote
+                )
+              }}>
+              Delete Note
+            </button>
+            </li>
+          )}
+        </ul>
+        </>
+      )}
+
+      </NotefulContext.Consumer>
+    );
+  }
 }
+
+export default FilteredNoteList

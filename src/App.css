@@ -1,3 +1,18 @@
 .page-content {
     display: flex;
 }
+
+#notelist {
+    width:100%;
+}
+
+button {
+    background:white;
+    border:1px solid black;
+    width:160px;
+    padding:10px;
+}
+
+.error {
+    color:red;
+}

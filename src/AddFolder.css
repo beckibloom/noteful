@@ -1,0 +1,13 @@
+.addfolder {
+    padding:10px;
+}
+
+.AddFolder__buttons {
+    margin-top:15px;
+}
+
+#foldername {
+    height:20px;
+    padding:3px;
+    width:215px;
+}

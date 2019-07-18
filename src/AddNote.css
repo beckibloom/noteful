@@ -1,0 +1,19 @@
+.addnote {
+    padding:10px;
+}
+
+.AddNote__buttons {
+    margin-top:15px;
+}
+
+#notename {
+    height:20px;
+    padding:3px;
+    width:225px;
+}
+
+select {
+    height:30px;
+    margin-top:10px;
+    margin-bottom:5px;
+}
