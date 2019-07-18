@@ -99,7 +99,7 @@ class AddFolder extends React.Component {
                         name='foldername'
                         id='foldername'
                         placeholder='My Folder'
-                        onBlur={e => this.updateFolderName(e.target.value)}
+                        onChange={e => this.updateFolderName(e.target.value)}
                     />
                     </div>
 

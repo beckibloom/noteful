@@ -166,7 +166,7 @@ class AddNote extends React.Component {
                         name='notename'
                         id='notename'
                         placeholder='My Note'
-                        onBlur={e => this.updateNoteName(e.target.value)}
+                        onChange={e => this.updateNoteName(e.target.value)}
                         required
                     />
                     
@@ -182,7 +182,7 @@ class AddNote extends React.Component {
                     {' '}
                     <select 
                         name='folderselect' id='folderselect'
-                        onBlur={e => this.updateFolderSelect(e.target.value)}>
+                        onChange={e => this.updateFolderSelect(e.target.value)}>
                         <option value='none'>Select one</option>
                         {this.getCurrentFolders()}
                     </select>
@@ -201,7 +201,7 @@ class AddNote extends React.Component {
                         form='add-note-form'
                         rows='10'
                         cols='45'
-                        onBlur={e => this.updateContent(e.target.value)}
+                        onChange={e => this.updateContent(e.target.value)}
                         required
                     />
                     </div>
