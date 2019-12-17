@@ -9,7 +9,7 @@ class AddFolder extends React.Component {
     static contextType = NotefulContext;
 
     state = {
-        folderName: {
+        folder_name: {
             value: '',
             touched: false
         },
@@ -21,7 +21,7 @@ class AddFolder extends React.Component {
     }
 
     validateName() {
-        const name = this.state.folderName.value.trim();
+        const name = this.state.folder_name.value.trim();
         if (name.length === 0) {
           return 'Name is required';
         } else if (name.length < 3) {
@@ -31,7 +31,7 @@ class AddFolder extends React.Component {
 
     updateFolderName(name) {
         this.setState({
-            folderName: {
+            folder_name: {
                 value: name,
                 touched: true,
             }
@@ -43,7 +43,7 @@ class AddFolder extends React.Component {
         const newFolderId = this.createId()
         const folder = {
             id: newFolderId,
-            name: this.state.folderName.value,
+            name: this.state.folder_name.value,
         }
 
         fetch(config.folders_endpoint, {
@@ -63,7 +63,7 @@ class AddFolder extends React.Component {
             })
             .then(data => {
                 this.setState = {
-                    folderName: {
+                    folder_name: {
                         value: '',
                         touched: false
                     },
@@ -92,18 +92,18 @@ class AddFolder extends React.Component {
                     </div>
 
                     <div>
-                    <label htmlFor='foldername'>Folder Name:</label>
+                    <label htmlFor='folder_name'>Folder Name:</label>
                     {' '}
                     <input 
                         type='text'
-                        name='foldername'
-                        id='foldername'
+                        name='folder_name'
+                        id='folder_name'
                         placeholder='My Folder'
                         onChange={e => this.updateFolderName(e.target.value)}
                     />
                     </div>
 
-                    {this.state.folderName.touched && (
+                    {this.state.folder_name.touched && (
                         <ValidationError message={this.validateName()} />
                     )}
 

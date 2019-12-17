@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './NoteList.css';
 import NotefulContext from './NotefulContext';
+import config from './config';
 
 function deleteNoteRequest(noteId, cb) {
-  const notesEndpoint = 'http://localhost:9090/notes';
-  fetch(notesEndpoint + `/${noteId}`, {
+  fetch(config.notes_endpoint + `/${noteId}`, {
     method: 'DELETE'
   })
     .then(res => {
