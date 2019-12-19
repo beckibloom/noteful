@@ -26,9 +26,10 @@ function deleteNoteRequest(noteId, cb, props) {
 }
 
 function getNoteObj(context, props) {
+  
   const note = context.notes.find(n =>
-    n.id === props.match.params.noteId)
-  return note;
+    n.id === parseInt(props.match.params.noteId))
+  return note !== undefined ? note : {id:0,note_name:'', modified:'', note_content:''};
 }
 
 class Note extends React.Component {
@@ -41,7 +42,7 @@ class Note extends React.Component {
         <ul>
           <li key={getNoteObj(context, this.props).id} className='note'>
             <Link to={`/note/${getNoteObj(context, this.props).id}`}>
-              <h2>{getNoteObj(context, this.props).name}</h2>
+              <h2>{getNoteObj(context, this.props).note_name}</h2>
             </Link>
               <p className="date-modified">Date modified: {getNoteObj(context, this.props).modified}</p>
               <button 
@@ -56,7 +57,7 @@ class Note extends React.Component {
                   Delete Note
                 </button>
           </li>
-          <p className='note-content'>{getNoteObj(context, this.props).content}</p>
+          <p className='note-content'>{getNoteObj(context, this.props).note_content}</p>
         </ul>
       </section>
     )}

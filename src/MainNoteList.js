@@ -42,7 +42,7 @@ class MainNoteList extends React.Component {
             <li key={note.id} className='note'>
               <Link to={`/note/${note.id}`}>
                 <h2>
-                  {note.name}
+                  {note.note_name}
                 </h2>
               </Link>
               <p className='date-modified'> Date Modified: {note.modified}</p>

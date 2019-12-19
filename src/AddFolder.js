@@ -16,10 +16,6 @@ class AddFolder extends React.Component {
         error: null,
     }
 
-    createId = () => {
-        return '_' + Math.random().toString(36).substr(2, 9);
-    }
-
     validateName() {
         const name = this.state.folder_name.value.trim();
         if (name.length === 0) {
@@ -40,10 +36,8 @@ class AddFolder extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        const newFolderId = this.createId()
         const folder = {
-            id: newFolderId,
-            name: this.state.folder_name.value,
+            folder_name: this.state.folder_name.value,
         }
 
         fetch(config.folders_endpoint, {

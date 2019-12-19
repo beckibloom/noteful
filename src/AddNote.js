@@ -84,7 +84,7 @@ class AddNote extends React.Component {
     getCurrentFolders = () => {
         const folderOptions = this.context.folders.map(folder => (
             <option value={folder.id} key={folder.id}>
-                {folder.name}
+                {folder.folder_name}
             </option>
         ))
         return folderOptions
@@ -92,16 +92,11 @@ class AddNote extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        const newNoteId = this.createId()
-        // const modifiedDate = new Date()
-        const modifiedDate = new Date()
         // Hard-coded folder ID to be replaced by folder selection. Hard-coded ID links to "Important" folder
         const newNote = {
-            id: newNoteId,
-            name: this.state.noteName.value,
-            modified: modifiedDate,
-            folderId: this.state.folderId.value,
-            content: this.state.noteContent.value,
+            note_name: this.state.noteName.value,
+            note_content: this.state.noteContent.value,
+            folder: this.state.folderId.value,
         }
 
         fetch(config.notes_endpoint, {
@@ -112,31 +107,14 @@ class AddNote extends React.Component {
             }
         })
             .then(res => {
-                if (!res.ok) {
-                    return res.json().then(error => {
-                        throw error
-                    })
-                }
-                return res.json()
+                return (!res.ok)
+                    ? res.json().then(e=>Promise.reject(e))
+                    : res.json()
             })
             .then(data => {
-                this.setState = {
-                    noteName: {
-                        value: '',
-                        touched: false,
-                    },
-                    folderId: {
-                        value: '',
-                        touched: false,
-                    },
-                    noteContent: {
-                        value: '',
-                        touched: false,
-                    },
-                    error: null,
-                }
-                this.props.history.push('/')
-                this.context.onAddNote(data)
+                console.log(data)
+                this.props.history.push('/');
+                this.context.onAddNote(data);
             })
             .catch(error => {
                 this.setState = { error }

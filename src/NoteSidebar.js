@@ -6,16 +6,17 @@ class NoteSidebar extends React.Component {
 
   static contextType = NotefulContext;
 
-  getFolderObject = () => {
-    const currentNote = this.context.notes.find(note =>
-      note.id === this.props.match.params.noteId)
-    const folderObj = this.context.folders.find(folder =>
-      folder.id === currentNote.folderId);
-    return folderObj;
+  getFolderObject = (notes, folders) => {
+    const currentNote = notes.find(note =>
+      note.id === parseInt(this.props.match.params.noteId))
+
+    const folderObj = currentNote !== undefined ?  folders.find(folder =>
+      folder.id === currentNote.folder) : {id:0,name:''};
+    return folderObj!==undefined ? folderObj: {id:0,name:''} ;
   }
 
   render() {
-    const folderObj = this.getFolderObject();
+    const folderObj = this.getFolderObject(this.context.notes, this.context.folders);
     return (
         <nav className='Sidebar' id='sidebar'>
             <button 
@@ -23,7 +24,7 @@ class NoteSidebar extends React.Component {
               onClick={() => this.props.history.goBack()}>
             Go Back
             </button>
-            <h2>Folder: {folderObj.name}</h2>
+            <h2>Folder: {folderObj.folder_name}</h2>
         </nav>
     );
   }
